@@ -1,0 +1,48 @@
+%noteSize {
+	width: 250px;
+	height: 250px;
+}
+
+.sticky-note-container {
+	position: relative;
+	perspective: 1000px;
+	float: left;
+	transition: 1s;
+
+	.sticky-note {
+		@extend %noteSize;
+		transition: 1s;
+		transform-style: preserve-3d;
+		transform: rotateY(0);
+	}
+
+	&.flip {
+		z-index: 1000;
+		.sticky-note {
+			transform: rotateY(180deg);
+		}
+	}
+
+	.front,
+	.back {
+		@extend %noteSize;
+		position: absolute;
+		backface-visibility: hidden;
+	}
+
+	.front {
+		background-color: $yellow;
+		z-index: 1;
+
+			textarea {
+				display: block;
+				border: none;
+				background: none;
+			}
+	}
+
+	.back {
+		background-color: $blue;
+		transform: rotateY(180deg);
+	}
+}

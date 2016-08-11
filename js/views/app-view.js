@@ -27,9 +27,19 @@ var app = app || {};
 			app.notes.each(this.addNote, this);
 		},
 		addNote: function (note) {
-			var view = new app.NoteView({model: note});
-			var viewEl = view.render().el;
+			var view,
+			viewEl,
+			offset;
+
+			view = new app.NoteView({model: note});
+			viewEl = view.render().el;
 			this.$content.append(viewEl);
+
+			//get position
+			offset = $(viewEl).offset();
+
+			//save position
+			note.save({posx: offset.left, posy: offset.top});
 			return view;
 		}
 	})	

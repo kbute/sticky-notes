@@ -1,0 +1,14 @@
+@import 'base';
+@import 'resets';
+@import 'note';
+
+html,
+body,
+.main-app {
+	height: 100%;
+}
+
+.content {
+	outline: 2px solid red;
+	height: 90%;
+}

@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.sticky-note-container .sticky-note, .sticky-note-container .front,
+.sticky-note-container .back {
+  width: 250px;
+  height: 250px;
+}
+
+.sticky-note-container {
+  position: relative;
+  perspective: 1000px;
+  float: left;
+  transition: 1s;
+}
+
+.sticky-note-container .sticky-note {
+  transition: 1s;
+  transform-style: preserve-3d;
+  transform: rotateY(0);
+}
+
+.sticky-note-container.flip {
+  z-index: 1000;
+}
+
+.sticky-note-container.flip .sticky-note {
+  transform: rotateY(180deg);
+}
+
+.sticky-note-container .front,
+.sticky-note-container .back {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.sticky-note-container .front {
+  background-color: #ffc;
+  z-index: 1;
+}
+
+.sticky-note-container .front textarea {
+  display: block;
+  border: none;
+  background: none;
+}
+
+.sticky-note-container .back {
+  background-color: #b3e8ff;
+  transform: rotateY(180deg);
+}
+
+html,
+body,
+.main-app {
+  height: 100%;
+}
+
+.content {
+  outline: 2px solid red;
+  height: 90%;
+}
+
+/*# sourceMappingURL=main.css.map */
