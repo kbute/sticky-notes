@@ -40,7 +40,7 @@ var app = app || {};
 
 			this.$el.addClass('flip');
 
-			this.translateToMiddle();
+			this.translateToCenterScreen();
 
 			this.$textarea.focus();
 		},
@@ -76,7 +76,7 @@ var app = app || {};
 				currentY: offset.top
 			}
 		},
-		translateToMiddle: function () {
+		translateToCenterScreen: function () {
 			var info = this.getDOMInfo(),
 			midx,
 			midy,
@@ -86,8 +86,8 @@ var app = app || {};
 			midx = (info.winWidth/2) - (info.elWidth/2);
 			midy = (info.winHeight/2) - (info.elHeight/2);
 
-			x = midx - info.originalX;
-			y = midy - info.originalY;
+			x = midx - info.currentX;
+			y = midy - info.currentY;
 
 			this.translate(x,y);
 		}

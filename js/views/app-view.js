@@ -20,7 +20,7 @@ var app = app || {};
 			app.notes.create();
 		},
 		createNote: function (note) {
-			this.addNote(note).openNote();
+			this.addNote(note);
 		},
 		allNotes: function () {
 			this.$content.html('');
@@ -33,7 +33,7 @@ var app = app || {};
 
 			view = new app.NoteView({model: note});
 			viewEl = view.render().el;
-			this.$content.append(viewEl);
+			this.$content.prepend(viewEl);
 
 			//get position
 			offset = $(viewEl).offset();

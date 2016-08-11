@@ -39,6 +39,7 @@
 .sticky-note-container .front {
   background-color: #ffc;
   z-index: 1;
+  transform: rotateY(0deg);
 }
 
 .sticky-note-container .front textarea {
