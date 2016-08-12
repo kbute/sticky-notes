@@ -36,7 +36,7 @@ var app = app || {};
 			var view,
 			viewEl,
 			offset;
-console.log('addNote',note);
+
 			view = new app.NoteView({model: note});
 			viewEl = view.render().el;
 			this.$content.prepend(viewEl);
@@ -59,7 +59,14 @@ console.log('addNote',note);
 
 				//prevent transition on dragging
 				this.dragItem.css('transition','unset');
-				event.originalEvent.dataTransfer.setData("text/plain", (left.replace(/auto/,0).replace(/px/,'') - event.clientX) + ',' + (top.replace(/auto/,0).replace(/px/,'') - event.clientY));
+				try {
+					event.originalEvent.dataTransfer.setData("text/plain", (left.replace(/auto/,0).replace(/px/,'') - event.clientX) + ',' + (top.replace(/auto/,0).replace(/px/,'') - event.clientY));
+				} catch (e) {
+					console.log(e);
+					this.dragItem.pos = [];
+					this.dragItem.pos.push(left.replace(/auto/,0).replace(/px/,'') - event.clientX);
+					this.dragItem.pos.push(top.replace(/auto/,0).replace(/px/,'') - event.clientY);
+				}
 			}
 		},
 		dragOver: function (event) {
@@ -67,14 +74,24 @@ console.log('addNote',note);
 			return false; 
 		},
 		dragDrop: function (event) {
-			console.log('dragDrop');
+
 			if($(event.target)){
-				var offset = event.originalEvent.dataTransfer.getData("text/plain").split(','),
+				var offset,
+				left,
+				top;
+
+				try{
+					offset = event.originalEvent.dataTransfer.getData("text/plain").split(',');
+				}catch (e) {
+					console.log(e);
+					offset = this.dragItem.pos;
+				}
+
 				left = (event.clientX + parseInt(offset[0],10)) + 'px',
 				top = (event.clientY + parseInt(offset[1],10)) + 'px';
+
 				this.dragItem.css('left', left);
 				this.dragItem.css('top', top);
-
 //				this.dragItem.model.save({posx: left, posy: top});
 
 				event.preventDefault();
