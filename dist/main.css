@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.sticky-note-container .sticky-note, .sticky-note-container .front,
+.sticky-note-container .back {
+  width: 250px;
+  height: 250px;
+}
+
+.sticky-note-container {
+  position: relative;
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+  float: left;
+}
+
+.sticky-note-container .sticky-note {
+  -webkit-transition: 1s;
+          transition: 1s;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform: rotateY(0);
+          transform: rotateY(0);
+}
+
+.sticky-note-container.flip {
+  z-index: 1000;
+}
+
+.sticky-note-container.flip .sticky-note {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.sticky-note-container .front,
+.sticky-note-container .back {
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.sticky-note-container .front {
+  background-color: #ffc;
+  z-index: 1;
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
+}
+
+.sticky-note-container .front textarea {
+  display: block;
+  border: none;
+  background: none;
+}
+
+.sticky-note-container .back {
+  background-color: #b3e8ff;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.sticky-note-container .delete {
+  float: right;
+}
+
+html,
+body,
+.main-app {
+  height: 100%;
+}
+
+.content {
+  background: #666;
+  height: 90%;
+}

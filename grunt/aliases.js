@@ -3,11 +3,13 @@ module.exports = {
 
     'dev': [
         'sass:dev',
+        'autoprefixer',
         'connect',
         'watch'
     ],
 
     'build': [
         'sass:dist',
+        'autoprefixer'
     ]
 };
