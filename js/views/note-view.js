@@ -9,10 +9,11 @@ var app = app || {};
 		template: _.template($('#note-template').html()),
 		events: {
 			'dragstart': 'dragStart',
-			'click .front': 'flipNote',
+			'dblclick .front': 'flipNote',
 			'click .delete': 'deleteNote',
 			'keypress .text': 'closeNote',
-			'click .back': 'flipNote'
+			'click .back': 'flipNote',
+			'click textarea': 'editNote'
 		},
 		initialize: function () {
 			this.listenTo(this.model, 'change', this.render);
@@ -30,6 +31,9 @@ var app = app || {};
 			this.$el.html(this.template(this.model.toJSON()));
 			this.$textarea = this.$('.front textarea');
 			return this;
+		},
+		editNote: function () {
+			this.$('textarea').focus();
 		},
 		openNote: function () {
 			
