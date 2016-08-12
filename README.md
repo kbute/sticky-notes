@@ -1,10 +1,10 @@
 ##Usage
-Single click to edit note
-Double click to have note flip and transition to the center of the screen
-Dragging works
-Delete work
-Adding new note works by clicking on "Add Note" button in top right
-Text in notes will save on refresh of browser.
+* Single click to edit note
+* Double click to have note flip and transition to the center of the screen
+* Dragging works
+* Delete work
+* Adding new note works by clicking on "Add Note" button in top right
+* Text in notes will save on refresh of browser.
 
 Note on IE 11.  I didn't figure out why the color doesn't change when the note flips.  I would need more time to investigate this.  Flipping the note back and forth requires double click and because of the textarea I put in to support text.
 
