@@ -8,6 +8,7 @@ var app = app || {};
 		className: 'sticky-note-container',
 		template: _.template($('#note-template').html()),
 		events: {
+			'dragstart': 'dragStart',
 			'click .front': 'flipNote',
 			'click .delete': 'deleteNote',
 			'keypress .text': 'closeNote',
@@ -16,8 +17,7 @@ var app = app || {};
 		initialize: function () {
 			this.listenTo(this.model, 'change', this.render);
 			this.listenTo(this.model, 'destroy', this.remove);
-
-
+			this.listenTo(this.model, 'note:unflip', this.unflipNote);
 
 			this.$el.attr('draggable',true);
 		},
@@ -44,13 +44,22 @@ var app = app || {};
 			
 			if(!this.$el.hasClass('flip')) {
 				this.$el.attr('draggable','false');
+				this.model.trigger('note:flip');
 				this.translateToCenterScreen();
 			} else {
-				this.$el.attr('draggable','true');
-				//transition back to original position
-				this.translate(0, 0);
+				this.unflipNote();
 			}
 			
+		},
+		unflipNote: function () {
+
+			if(this.$el.hasClass('flip')) {
+
+				this.$el.attr('draggable', 'true');
+
+				//transition back to original position
+				this.translate(0,0);
+			}
 		},
 		translate: function(x,y) {
 			console.log(x,y);
@@ -88,6 +97,9 @@ var app = app || {};
 			y = midy - info.currentY;
 
 			this.translate(x,y);
+		},
+		dragStart: function () {
+			this.model.trigger('note:dragged');
 		}
 	})
 })(jQuery);

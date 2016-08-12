@@ -16,6 +16,8 @@ var app = app || {};
 
 			this.listenTo(app.notes, 'add', this.createNote);
 			this.listenTo(app.notes, 'reset', this.allNotes);
+			this.listenTo(app.notes, 'note:flip', this.unflipSiblings);
+			this.listenTo(app.notes, 'note:dragging', this.setDraggingNote);
 
 			app.notes.fetch({reset: true});
 		},
@@ -65,14 +67,22 @@ var app = app || {};
 			return false; 
 		},
 		dragDrop: function (event) {
-		if($(event.target)){
-			console.log('in2',event);
-			var offset = event.originalEvent.dataTransfer.getData("text/plain").split(',');
-			this.dragItem.css('left', (event.clientX + parseInt(offset[0],10)) + 'px');
-			this.dragItem.css('top' , (event.clientY + parseInt(offset[1],10)) + 'px');
-			event.preventDefault();
-			return false;
-		}
+			if($(event.target)){
+				console.log('in2',event);
+				var offset = event.originalEvent.dataTransfer.getData("text/plain").split(',');
+				this.dragItem.css('left', (event.clientX + parseInt(offset[0],10)) + 'px');
+				this.dragItem.css('top' , (event.clientY + parseInt(offset[1],10)) + 'px');
+				event.preventDefault();
+				return false;
+			}
+		},
+		unflipSiblings: function (note) {
+console.log('unflipSiblings');
+			app.notes.forEach(function (item, i) {
+				if(note != item) {
+					item.trigger('note:unflip');
+				}
+			})
 		}
 	})	
 })();
