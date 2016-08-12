@@ -43,15 +43,20 @@
 
 .sticky-note-container .front {
   background-color: #ffc;
+  font: 100% "Reenie Beanie", cursive;
   z-index: 1;
   -webkit-transform: rotateY(0deg);
           transform: rotateY(0deg);
 }
 
 .sticky-note-container .front textarea {
-  display: block;
+  font-size: 4em;
   border: none;
   background: none;
+  display: block;
+  height: 80%;
+  margin: 10px auto 0;
+  width: 90%;
 }
 
 .sticky-note-container .back {

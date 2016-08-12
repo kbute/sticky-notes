@@ -3,7 +3,7 @@ module.exports = {
         livereload: true
     },
     scss: {
-        tasks: ['sass:dev'],
+        tasks: ['sass:dev','autoprefixer'],
         files: ['**/scss/*.scss', '!**/bower_components/**', '!**/tcom/**']
     },
     css: {

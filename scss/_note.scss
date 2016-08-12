@@ -31,13 +31,18 @@
 
 	.front {
 		background-color: $yellow;
+		font: 100% $font-stack;
 		z-index: 1;
 		transform: rotateY(0deg);
 
 			textarea {
-				display: block;
+				font-size: 4em;
 				border: none;
 				background: none;
+				display: block;
+				height: 80%;
+				margin: 10px auto 0;
+				width: 90%;
 			}
 	}
 
