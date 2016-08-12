@@ -54,6 +54,9 @@ var app = app || {};
 				left = this.dragItem.css('left');
 				top = this.dragItem.css('top');
 
+				//prevent transition on dragging
+				this.dragItem.css('transition','unset');
+
 				event.originalEvent.dataTransfer.setData("text/plain", (left.replace(/px/,'') - event.clientX) + ',' + (top.replace(/px/,'') - event.clientY));
 			}
 		},

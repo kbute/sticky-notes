@@ -13,7 +13,6 @@
   position: relative;
   perspective: 1000px;
   float: left;
-  transition: 1s;
 }
 
 .sticky-note-container .sticky-note {

@@ -58,6 +58,7 @@ var app = app || {};
 		translate: function(x,y) {
 			console.log(x,y);
 			this.$el.css({
+				'transition': '1s',
 				'transform': 'translate(' + x + 'px,' + y + 'px)'
 			});
 		},
