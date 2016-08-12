@@ -13,7 +13,8 @@ var app = app || {};
 			'click .delete': 'deleteNote',
 			'keypress .text': 'closeNote',
 			'click .back': 'flipNote',
-			'click textarea': 'editNote'
+			'click textarea': 'editNote',
+			'blur textarea': 'saveNote'
 		},
 		initialize: function () {
 			this.listenTo(this.model, 'change', this.render);
@@ -33,7 +34,10 @@ var app = app || {};
 			return this;
 		},
 		editNote: function () {
-			this.$('textarea').focus();
+			this.$textarea.focus();
+		},
+		saveNote: function () {
+			this.model.save({note: this.$textarea.val()});
 		},
 		openNote: function () {
 			
@@ -44,7 +48,6 @@ var app = app || {};
 			this.model.destroy();
 		},
 		flipNote: function () {
-			this.model.save({note: this.$textarea.val()});
 			
 			if(!this.$el.hasClass('flip')) {
 				this.$el.attr('draggable','false');
