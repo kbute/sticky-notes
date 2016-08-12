@@ -9,7 +9,8 @@ var app = app || {};
 			'click button.create-note': 'newNote',
 			'dragstart .content': 'dragStart',
 			'dragover .content': 'dragOver',
-			'drop .content': 'dragDrop'
+			'drop .content': 'dragDrop',
+			'dragend .content': 'dragEnd'
 		},
 		initialize: function () {
 			this.$content = this.$('.content');
@@ -35,7 +36,7 @@ var app = app || {};
 			var view,
 			viewEl,
 			offset;
-
+console.log('addNote',note);
 			view = new app.NoteView({model: note});
 			viewEl = view.render().el;
 			this.$content.prepend(viewEl);
@@ -58,8 +59,7 @@ var app = app || {};
 
 				//prevent transition on dragging
 				this.dragItem.css('transition','unset');
-
-				event.originalEvent.dataTransfer.setData("text/plain", (left.replace(/px/,'') - event.clientX) + ',' + (top.replace(/px/,'') - event.clientY));
+				event.originalEvent.dataTransfer.setData("text/plain", (left.replace(/auto/,0).replace(/px/,'') - event.clientX) + ',' + (top.replace(/auto/,0).replace(/px/,'') - event.clientY));
 			}
 		},
 		dragOver: function (event) {
@@ -67,17 +67,25 @@ var app = app || {};
 			return false; 
 		},
 		dragDrop: function (event) {
+			console.log('dragDrop');
 			if($(event.target)){
-				console.log('in2',event);
-				var offset = event.originalEvent.dataTransfer.getData("text/plain").split(',');
-				this.dragItem.css('left', (event.clientX + parseInt(offset[0],10)) + 'px');
-				this.dragItem.css('top' , (event.clientY + parseInt(offset[1],10)) + 'px');
+				var offset = event.originalEvent.dataTransfer.getData("text/plain").split(','),
+				left = (event.clientX + parseInt(offset[0],10)) + 'px',
+				top = (event.clientY + parseInt(offset[1],10)) + 'px';
+				this.dragItem.css('left', left);
+				this.dragItem.css('top', top);
+
+//				this.dragItem.model.save({posx: left, posy: top});
+
 				event.preventDefault();
 				return false;
 			}
 		},
+		dragEnd: function (event) {
+		},
+		setDraggingNote: function (note) {
+		},
 		unflipSiblings: function (note) {
-console.log('unflipSiblings');
 			app.notes.forEach(function (item, i) {
 				if(note != item) {
 					item.trigger('note:unflip');

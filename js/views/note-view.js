@@ -99,7 +99,7 @@ var app = app || {};
 			this.translate(x,y);
 		},
 		dragStart: function () {
-			this.model.trigger('note:dragged');
+			this.model.trigger('note:dragging');
 		}
 	})
 })(jQuery);
