@@ -8,12 +8,10 @@ var app = app || {};
 		className: 'sticky-note-container',
 		template: _.template($('#note-template').html()),
 		events: {
-			'click .front': 'openNote',
+			'click .front': 'flipNote',
 			'click .delete': 'deleteNote',
 			'keypress .text': 'closeNote',
-			'keydown .close': 'closeNote',
-			'click .close': 'closeNote',
-			'click .back': 'closeNote'
+			'click .back': 'flipNote'
 		},
 		initialize: function () {
 			this.listenTo(this.model, 'change', this.render);
@@ -34,33 +32,30 @@ var app = app || {};
 			return this;
 		},
 		openNote: function () {
-			var win = $(window),
-			winHeight = win.height(),
-			winWidth = win.width();
-
-			this.$el.addClass('flip');
-
-			this.translateToCenterScreen();
+			
 
 			this.$textarea.focus();
 		},
 		deleteNote: function () {
 			this.model.destroy();
 		},
-		closeNote: function () {
+		flipNote: function () {
 			this.model.save({note: this.$textarea.val()});
 			
-			//transition back to original position
-			this.translate(0, 0);
-
-			this.$el.removeClass('flip');
+			if(!this.$el.hasClass('flip')) {
+				this.translateToCenterScreen();
+			} else {
+				//transition back to original position
+				this.translate(0, 0);
+			}
+			
 		},
 		translate: function(x,y) {
 			console.log(x,y);
 			this.$el.css({
 				'transition': '1s',
 				'transform': 'translate(' + x + 'px,' + y + 'px)'
-			});
+			}).toggleClass('flip');
 		},
 		getDOMInfo: function () {
 			var win = $(window),
