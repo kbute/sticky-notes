@@ -43,8 +43,10 @@ var app = app || {};
 			this.model.save({note: this.$textarea.val()});
 			
 			if(!this.$el.hasClass('flip')) {
+				this.$el.attr('draggable','false');
 				this.translateToCenterScreen();
 			} else {
+				this.$el.attr('draggable','true');
 				//transition back to original position
 				this.translate(0, 0);
 			}
