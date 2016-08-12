@@ -52,6 +52,10 @@
   transform: rotateY(180deg);
 }
 
+.sticky-note-container .delete {
+  float: right;
+}
+
 html,
 body,
 .main-app {
@@ -59,7 +63,7 @@ body,
 }
 
 .content {
-  outline: 2px solid red;
+  background: #666;
   height: 90%;
 }
 
